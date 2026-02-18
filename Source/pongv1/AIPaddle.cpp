@@ -12,7 +12,6 @@ void AAIPaddle::BeginPlay()
 
     FixedLocation = GetActorLocation();
 
-    // Find ball at start
     UpdateTargetBall();
 }
 

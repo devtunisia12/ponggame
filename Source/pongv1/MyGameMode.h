@@ -4,6 +4,8 @@
 #include "GameFramework/GameModeBase.h"
 #include "MyGameMode.generated.h"
 
+class UScoreWidget; 
+class AMyBall;
 UCLASS()
 class PONGV1_API AMyGameMode : public AGameModeBase
 {
@@ -15,6 +17,11 @@ public:
     void AddScore();
 
     void SpawnBall();
+
+    UPROPERTY(EditAnywhere, Category = "UI")
+    TSubclassOf<UUserWidget> ScoreWidgetClass;
+
+    UScoreWidget* ScoreWidgetInstance;
 
 private:
     int32 PlayerScore = 0;

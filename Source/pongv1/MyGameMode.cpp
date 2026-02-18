@@ -2,6 +2,7 @@
 #include "MyBall.h"
 #include "Kismet/GameplayStatics.h"
 #include "AIPaddle.h"
+#include "ScoreWidget.h"
 #include "Engine/World.h"
 
 void AMyGameMode::BeginPlay()
@@ -9,11 +10,28 @@ void AMyGameMode::BeginPlay()
     Super::BeginPlay();
 
     SpawnBall();
+
+    if (ScoreWidgetClass)
+    {
+        ScoreWidgetInstance = CreateWidget<UScoreWidget>(GetWorld(), ScoreWidgetClass);
+        if (ScoreWidgetInstance)
+        {
+            ScoreWidgetInstance->AddToViewport();          
+            ScoreWidgetInstance->UpdateScore(PlayerScore); 
+        }
+    }
 }
 
 void AMyGameMode::AddScore()
 {
     PlayerScore++;
+
+    if (ScoreWidgetInstance)
+    {
+        ScoreWidgetInstance->UpdateScore(PlayerScore); 
+    }
+    UE_LOG(LogTemp, Warning, TEXT("Score: %d"), PlayerScore);
+
 
     GetWorld()->GetTimerManager().SetTimer(
         RespawnTimer,
@@ -31,7 +49,6 @@ void AMyGameMode::SpawnBall()
         FVector SpawnLocation = FVector(760.f, 590.f, 0.f); 
         FRotator SpawnRotation = FRotator::ZeroRotator;
 
-        // Spawn the ball
         AMyBall* NewBall = GetWorld()->SpawnActor<AMyBall>(
             BallClass,
             SpawnLocation,
