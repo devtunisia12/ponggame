@@ -2,7 +2,9 @@
 #include "Components/BoxComponent.h"
 #include "Engine/Engine.h"
 #include "MyBall.h"
-#include "Components/TextBlock.h" // This is correct for UTextBlock
+#include "MyGameMode.h"
+#include "Kismet/GameplayStatics.h"
+#include "Components/TextBlock.h" 
 
 
 AWinZone::AWinZone()
@@ -34,22 +36,19 @@ void AWinZone::OnOverlapBegin(UPrimitiveComponent* OverlappedComp,
     if (OtherActor && OtherActor->IsA(AMyBall::StaticClass()))
     {
         AMyBall* Ball = Cast<AMyBall>(OtherActor);
+
         if (Ball)
         {
-            // Increase score
-            Ball->PlayerScore += 1;
+            AMyGameMode* GM = Cast<AMyGameMode>(
+                UGameplayStatics::GetGameMode(GetWorld())
+            );
 
-            // Call Blueprint event to update the UMG widget
-            Ball->UpdateScoreWidget();
-
-            // Optional: debug message
-            if (GEngine)
+            if (GM)
             {
-                GEngine->AddOnScreenDebugMessage(
-                    -1, 3.f, FColor::Yellow,
-                    FString::Printf(TEXT("Ball entered Win Zone! Score: %d"), Ball->PlayerScore)
-                );
+                GM->AddScore();
             }
+
+            Ball->Destroy(); 
         }
     }
 }
