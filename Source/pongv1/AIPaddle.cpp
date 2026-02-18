@@ -1,5 +1,5 @@
 #include "AIPaddle.h"
-#include "MyBall.h"
+#include "Kismet/GameplayStatics.h"
 
 AAIPaddle::AAIPaddle()
 {
@@ -9,6 +9,11 @@ AAIPaddle::AAIPaddle()
 void AAIPaddle::BeginPlay()
 {
     Super::BeginPlay();
+
+    FixedLocation = GetActorLocation();
+
+    // Find ball at start
+    UpdateTargetBall();
 }
 
 void AAIPaddle::Tick(float DeltaTime)
@@ -20,18 +25,29 @@ void AAIPaddle::Tick(float DeltaTime)
     FVector PaddleLocation = GetActorLocation();
     FVector BallLocation = TargetBall->GetActorLocation();
 
-    float Direction = 0.f;
+    PaddleLocation.X = FMath::FInterpTo(PaddleLocation.X, BallLocation.X, DeltaTime, MoveSpeed / 100.f);
 
-    if (BallLocation.X > PaddleLocation.X)
-    {
-        Direction = 1.f;
-    }
-    else if (BallLocation.X < PaddleLocation.X)
-    {
-        Direction = -1.f;
-    }
-
-    PaddleLocation.X += Direction * MoveSpeed * DeltaTime;
+    PaddleLocation.Y = FixedLocation.Y;
+    PaddleLocation.Z = FixedLocation.Z;
 
     SetActorLocation(PaddleLocation);
+}
+
+
+void AAIPaddle::UpdateTargetBall()
+{
+    if (!TargetBall || !TargetBall->IsValidLowLevel() || TargetBall->IsPendingKill())
+    {
+        TArray<AActor*> FoundBalls;
+        UGameplayStatics::GetAllActorsWithTag(GetWorld(), FName("Ball"), FoundBalls);
+
+        if (FoundBalls.Num() > 0)
+        {
+            TargetBall = FoundBalls[0];
+        }
+        else
+        {
+            TargetBall = nullptr;
+        }
+    }
 }

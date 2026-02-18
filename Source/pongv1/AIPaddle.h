@@ -4,8 +4,6 @@
 #include "GameFramework/Pawn.h"
 #include "AIPaddle.generated.h"
 
-class AMyBall;
-
 UCLASS()
 class PONGV1_API AAIPaddle : public APawn
 {
@@ -14,17 +12,22 @@ class PONGV1_API AAIPaddle : public APawn
 public:
     AAIPaddle();
 
+    void SetTargetBall(AActor* NewBall) { TargetBall = NewBall; }
+
 protected:
     virtual void BeginPlay() override;
 
 public:
     virtual void Tick(float DeltaTime) override;
 
-    // Reference to ball
-    UPROPERTY(EditAnywhere)
-    AMyBall* TargetBall;
-
 private:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY()
+    AActor* TargetBall;
+
+    UPROPERTY(EditAnywhere, Category = "AI")
     float MoveSpeed = 800.f;
+
+    FVector FixedLocation;
+
+    void UpdateTargetBall();
 };
