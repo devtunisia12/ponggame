@@ -19,11 +19,10 @@ void AMyGameMode::AddScore()
 {
     PlayerScore++;
 
-    UE_LOG(LogTemp, Warning, TEXT("Score: %d"), PlayerScore);
 
     if (ScoreWidgetInstance)
     {
-        ScoreWidgetInstance->UpdateScore(PlayerScore);
+        ScoreWidgetInstance->UpdatePlayerScore(PlayerScore);
     }
 
     GetWorld()->GetTimerManager().SetTimer(
@@ -34,6 +33,27 @@ void AMyGameMode::AddScore()
         false
     );
 }
+
+void AMyGameMode::AddScoreenemy()
+{
+    EnemyScore++;
+
+
+    if (ScoreWidgetInstance)
+    {
+        ScoreWidgetInstance->UpdateEnemyScore(EnemyScore);
+    }
+
+    GetWorld()->GetTimerManager().SetTimer(
+        RespawnTimer,
+        this,
+        &AMyGameMode::SpawnBall,
+        3.0f,
+        false
+    );
+}
+
+
 
 void AMyGameMode::SpawnBall()
 {

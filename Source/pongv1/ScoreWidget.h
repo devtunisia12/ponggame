@@ -14,12 +14,17 @@ class PONGV1_API UScoreWidget : public UUserWidget
 public:
 
     UFUNCTION(BlueprintCallable, Category = "UI")
-    void UpdateScore(int32 NewScore);
+    void UpdatePlayerScore(int32 NewScore);
+
+    UFUNCTION(BlueprintCallable, Category = "UI")
+    void UpdateEnemyScore(int32 NewScore);
 
 protected:
     virtual void NativeConstruct() override;
 
     UPROPERTY(meta = (BindWidget))
-    UTextBlock* ScoreText;
+    UTextBlock* ScoreText;    // Player score
 
+    UPROPERTY(meta = (BindWidget))
+    UTextBlock* ScoreTextE;   // Enemy score
 };

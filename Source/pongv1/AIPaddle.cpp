@@ -24,8 +24,16 @@ void AAIPaddle::Tick(float DeltaTime)
     FVector PaddleLocation = GetActorLocation();
     FVector BallLocation = TargetBall->GetActorLocation();
 
-    PaddleLocation.X = FMath::FInterpTo(PaddleLocation.X, BallLocation.X, DeltaTime, MoveSpeed / 100.f);
+    // Add random offset for "stupidity"
+    float Error = FMath::RandRange(-100.f, 100.f);
 
+    // Target position the AI tries to reach smoothly
+    float TargetX = BallLocation.X + Error;
+
+    // Smoothly interpolate to the target X
+    PaddleLocation.X = FMath::FInterpTo(PaddleLocation.X, TargetX, DeltaTime, MoveSpeed / 100.f);
+
+    // Keep Y and Z fixed
     PaddleLocation.Y = FixedLocation.Y;
     PaddleLocation.Z = FixedLocation.Z;
 

@@ -9,11 +9,26 @@ void UScoreWidget::NativeConstruct()
     {
         ScoreText->SetText(FText::AsNumber(0));
     }
+
+    if (ScoreTextE)
+    {
+        ScoreTextE->SetText(FText::AsNumber(0));
+    }
+
 }
 
-void UScoreWidget::UpdateScore(int32 NewScore)
+void UScoreWidget::UpdatePlayerScore(int32 NewScore)
 {
-    if (!ScoreText) return;
+    if (ScoreText)
+    {
+        ScoreText->SetText(FText::AsNumber(NewScore));
+    }
+}
 
-    ScoreText->SetText(FText::AsNumber(NewScore));
+void UScoreWidget::UpdateEnemyScore(int32 NewScore)
+{
+    if (ScoreTextE)
+    {
+        ScoreTextE->SetText(FText::AsNumber(NewScore));
+    }
 }

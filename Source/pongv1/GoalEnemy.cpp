@@ -1,13 +1,10 @@
-﻿#include "WinZone.h"
+#include "GoalEnemy.h"
 #include "Components/BoxComponent.h"
-#include "Engine/Engine.h"
 #include "MyBall.h"
 #include "MyGameMode.h"
 #include "Kismet/GameplayStatics.h"
-#include "Components/TextBlock.h" 
 
-
-AWinZone::AWinZone()
+AGoalEnemy::AGoalEnemy()
 {
     PrimaryActorTick.bCanEverTick = false;
 
@@ -20,13 +17,13 @@ AWinZone::AWinZone()
     TriggerZone->SetCollisionResponseToAllChannels(ECR_Overlap);
 }
 
-void AWinZone::BeginPlay()
+void AGoalEnemy::BeginPlay()
 {
     Super::BeginPlay();
-    TriggerZone->OnComponentBeginOverlap.AddDynamic(this, &AWinZone::OnOverlapBegin);
+    TriggerZone->OnComponentBeginOverlap.AddDynamic(this, &AGoalEnemy::OnOverlapBegin);
 }
 
-void AWinZone::OnOverlapBegin(
+void AGoalEnemy::OnOverlapBegin(
     UPrimitiveComponent* OverlappedComp,
     AActor* OtherActor,
     UPrimitiveComponent* OtherComp,
@@ -36,13 +33,10 @@ void AWinZone::OnOverlapBegin(
 {
     if (OtherActor && OtherActor->IsA(AMyBall::StaticClass()))
     {
-        AMyGameMode* GM = Cast<AMyGameMode>(
-            UGameplayStatics::GetGameMode(GetWorld())
-        );
-
+        AMyGameMode* GM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
         if (GM)
         {
-            GM->AddScore();  
+            GM->AddScoreenemy();  // Add to enemy score
         }
 
         OtherActor->Destroy();

@@ -20,8 +20,12 @@ public:
 
     void SpawnBall();
 
+    void AddScoreenemy();
+
 private:
     int32 PlayerScore = 0;
+    int32 EnemyScore = 0;
+
 
     UPROPERTY()
     UScoreWidget* ScoreWidgetInstance;   // ❗ NOT EditAnywhere
