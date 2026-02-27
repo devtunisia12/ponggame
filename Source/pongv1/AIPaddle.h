@@ -23,6 +23,8 @@ public:
 private:
     UPROPERTY()
     AActor* TargetBall;
+    float ReactionTime = 0.5f;
+    float ReactionTimer = 0.f;
 
     UPROPERTY(EditAnywhere, Category = "AI")
     float MoveSpeed = 800.f;
