@@ -1,4 +1,4 @@
-#include "WinZone.h"
+﻿#include "WinZone.h"
 #include "Components/BoxComponent.h"
 #include "Engine/Engine.h"
 #include "MyBall.h"
@@ -26,7 +26,8 @@ void AWinZone::BeginPlay()
     TriggerZone->OnComponentBeginOverlap.AddDynamic(this, &AWinZone::OnOverlapBegin);
 }
 
-void AWinZone::OnOverlapBegin(UPrimitiveComponent* OverlappedComp,
+void AWinZone::OnOverlapBegin(
+    UPrimitiveComponent* OverlappedComp,
     AActor* OtherActor,
     UPrimitiveComponent* OtherComp,
     int32 OtherBodyIndex,
@@ -35,20 +36,15 @@ void AWinZone::OnOverlapBegin(UPrimitiveComponent* OverlappedComp,
 {
     if (OtherActor && OtherActor->IsA(AMyBall::StaticClass()))
     {
-        AMyBall* Ball = Cast<AMyBall>(OtherActor);
+        AMyGameMode* GM = Cast<AMyGameMode>(
+            UGameplayStatics::GetGameMode(GetWorld())
+        );
 
-        if (Ball)
+        if (GM)
         {
-            AMyGameMode* GM = Cast<AMyGameMode>(
-                UGameplayStatics::GetGameMode(GetWorld())
-            );
-
-            if (GM)
-            {
-                GM->AddScore();
-            }
-
-            Ball->Destroy(); 
+            GM->AddScore();  
         }
+
+        OtherActor->Destroy();
     }
 }
