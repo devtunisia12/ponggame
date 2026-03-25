@@ -9,7 +9,7 @@ class PONGV1_API AAIPaddle : public APawn
 {
     GENERATED_BODY()
 
-override:
+protected:
     virtual void BeginPlay() override;
 
 public:
