@@ -26,9 +26,7 @@ public:
     UFUNCTION(BlueprintImplementableEvent, Category = "UI")
     void UpdateScoreWidget();
 
-private:
-    FVector Velocity;
-
+    //Variables for Ball Movement and Boundaries
     UPROPERTY(EditAnywhere)
     float Speed = 1000.f;
 
@@ -43,4 +41,7 @@ private:
 
     UPROPERTY(EditAnywhere)
     float MaxY = 1320.f;
+
+private:
+    FVector Velocity;
 };

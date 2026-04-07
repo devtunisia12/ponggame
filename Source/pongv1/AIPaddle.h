@@ -9,22 +9,19 @@ class PONGV1_API AAIPaddle : public APawn
 {
     GENERATED_BODY()
 
-public:
-    AAIPaddle();
-
-    void SetTargetBall(AActor* NewBall) { TargetBall = NewBall; }
-
 protected:
     virtual void BeginPlay() override;
 
 public:
+    AAIPaddle();
+
+    void SetTargetBall(AActor* NewBall) { TargetBall = NewBall; }
     virtual void Tick(float DeltaTime) override;
 
 private:
     UPROPERTY()
     AActor* TargetBall;
     float ReactionTime = 0.5f;
-    float ReactionTimer = 0.f;
 
     UPROPERTY(EditAnywhere, Category = "AI")
     float MoveSpeed = 800.f;

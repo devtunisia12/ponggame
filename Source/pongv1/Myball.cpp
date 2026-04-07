@@ -14,9 +14,9 @@ void AMyBall::BeginPlay()
     Super::BeginPlay();
 
     float XDir = FMath::RandBool() ? 1.f : -1.f;
-    float YDir = FMath::FRandRange(-0.5f, 0.5f);
+    float Dir = FMath::RandBool() ? 1.f : -1.f;
 
-    Velocity = FVector(XDir, YDir, 0.f).GetSafeNormal() * Speed;
+    Velocity = FVector(Dir, Dir, 0.f).GetSafeNormal() * Speed;
 }
 
 void AMyBall::Tick(float DeltaTime)
@@ -30,18 +30,19 @@ void AMyBall::Tick(float DeltaTime)
     FCollisionQueryParams Params;
     Params.AddIgnoredActor(this);
 
-    if (GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_WorldStatic, Params))
+    if (GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, Params))
     {
-        if (Hit.GetActor() && Hit.GetActor()->ActorHasTag("Wall"))
+        if (Hit.GetActor())
         {
             FVector Normal = Hit.ImpactNormal;
+
             Velocity = Velocity - 2.f * FVector::DotProduct(Velocity, Normal) * Normal;
 
-            End = Hit.ImpactPoint + Velocity.GetSafeNormal() * 2.f;
+            End = Hit.ImpactPoint + Velocity.GetSafeNormal() * 10.f;
 
             if (GEngine)
             {
-                GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green, TEXT("Hit Wall!"));
+                GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green, TEXT("Hit!"));
             }
         }
 
