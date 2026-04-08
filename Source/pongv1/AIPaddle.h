@@ -26,7 +26,16 @@ private:
     UPROPERTY(EditAnywhere, Category = "AI")
     float MoveSpeed = 800.f;
 
+    UPROPERTY(EditAnywhere, Category = "AI")
+    float MinX = -300.f;
+
+    UPROPERTY(EditAnywhere, Category = "AI")
+    float MaxX = 300.f;
+
     FVector FixedLocation;
 
     void UpdateTargetBall();
+
+    float CurrentError = 0.f;
+    float TimeSinceLastUpdate = 0.f;
 };

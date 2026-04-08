@@ -13,7 +13,6 @@ void AMyBall::BeginPlay()
 {
     Super::BeginPlay();
 
-    float XDir = FMath::RandBool() ? 1.f : -1.f;
     float Dir = FMath::RandBool() ? 1.f : -1.f;
 
     Velocity = FVector(Dir, Dir, 0.f).GetSafeNormal() * Speed;

@@ -9,7 +9,7 @@ AAIPaddle::AAIPaddle()
 void AAIPaddle::BeginPlay()
 {
     Super::BeginPlay();
-
+    CurrentError = FMath::RandRange(-100.f, 100.f);
     FixedLocation = GetActorLocation();
 
     UpdateTargetBall();
@@ -24,16 +24,21 @@ void AAIPaddle::Tick(float DeltaTime)
     FVector PaddleLocation = GetActorLocation();
     FVector BallLocation = TargetBall->GetActorLocation();
 
-    // Add random offset for "stupidity"
-    float Error = FMath::RandRange(-100.f, 100.f);
 
-    // Target position the AI tries to reach smoothly
-    float TargetX = BallLocation.X + Error;
+    TimeSinceLastUpdate += DeltaTime;
 
-    // Smoothly interpolate to the target X
+    if (TimeSinceLastUpdate >= ReactionTime)
+    {
+        CurrentError = FMath::RandRange(-100.f, 100.f);
+        TimeSinceLastUpdate = 0.f;
+    }
+
+    float TargetX = BallLocation.X + CurrentError;
+
+    TargetX = FMath::Clamp(TargetX, MinX, MaxX);
+
     PaddleLocation.X = FMath::FInterpTo(PaddleLocation.X, TargetX, DeltaTime, MoveSpeed / 100.f);
 
-    // Keep Y and Z fixed
     PaddleLocation.Y = FixedLocation.Y;
     PaddleLocation.Z = FixedLocation.Z;
 
