@@ -9,13 +9,11 @@ class PONGV1_API AMyBall : public AActor
 {
     GENERATED_BODY()
 
-public:
-    AMyBall();
-
 protected:
     virtual void BeginPlay() override;
 
 public:
+    AMyBall();
     virtual void Tick(float DeltaTime) override;
 
     // Score variable exposed to Blueprint

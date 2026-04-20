@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\pongv1.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\pongv1.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\pongv1Editor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.vsconfig" />
+    <None Include="..\..\UpgradeLog.htm" />
+    <None Include="..\..\UpgradeLog2.htm" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\pongv1">
+      <UniqueIdentifier>{ECC56867-F76F-3CA8-AAAD-2838EF4D7D54}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\pongv1\AIPaddle.cpp">
+      <Filter>Source\pongv1</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\pongv1\AIPaddle.h">
+      <Filter>Source\pongv1</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\pongv1\GoalEnemy.cpp">
+      <Filter>Source\pongv1</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\pongv1\GoalEnemy.h">
+      <Filter>Source\pongv1</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\pongv1\mainmenucode.cpp">
+      <Filter>Source\pongv1</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\pongv1\mainmenucode.h">
+      <Filter>Source\pongv1</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\pongv1\Myball.cpp">
+      <Filter>Source\pongv1</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\pongv1\Myball.h">
+      <Filter>Source\pongv1</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\pongv1\MyGameMode.cpp">
+      <Filter>Source\pongv1</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\pongv1\MyGameMode.h">
+      <Filter>Source\pongv1</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\pongv1\PaddleMove.cpp">
+      <Filter>Source\pongv1</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\pongv1\PaddleMove.h">
+      <Filter>Source\pongv1</Filter>
+    </ClInclude>
+    <None Include="..\..\Source\pongv1\pongv1.Build.cs">
+      <Filter>Source\pongv1</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\pongv1\pongv1.cpp">
+      <Filter>Source\pongv1</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\pongv1\pongv1.h">
+      <Filter>Source\pongv1</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\pongv1\ScoreWidget.cpp">
+      <Filter>Source\pongv1</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\pongv1\ScoreWidget.h">
+      <Filter>Source\pongv1</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\pongv1\WinZone.cpp">
+      <Filter>Source\pongv1</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\pongv1\WinZone.h">
+      <Filter>Source\pongv1</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

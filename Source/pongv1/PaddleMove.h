@@ -11,6 +11,8 @@ class PONGV1_API APaddleMove : public APawn
 
 public:
     APaddleMove();
+    virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
 
 protected:
     virtual void BeginPlay() override;
@@ -28,7 +30,4 @@ protected:
 
     UPROPERTY(EditAnywhere, Category = "Movement")
     float MaxX = 1130.f;
-
-public:
-    virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 };
